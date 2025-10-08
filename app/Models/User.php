@@ -21,7 +21,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'role', // Make sure this is included
+        'role',
     ];
 
     /**
@@ -47,14 +47,33 @@ class User extends Authenticatable
         ];
     }
 
-    // Add these role methods
+    // Role methods
     public function hasRole($role)
     {
+        if (is_array($role)) {
+            return in_array($this->role, $role);
+        }
+        
         return $this->role === $role;
     }
 
     public function isPrincipal()
     {
         return $this->hasRole('principal');
+    }
+
+    public function isAdmin()
+    {
+        return $this->hasRole('admin');
+    }
+
+    public function isUser()
+    {
+        return $this->hasRole('user');
+    }
+
+    public function hasAnyRole(array $roles)
+    {
+        return in_array($this->role, $roles);
     }
 }

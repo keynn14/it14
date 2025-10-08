@@ -24,6 +24,7 @@ class Kernel extends HttpKernel
             \Illuminate\View\Middleware\ShareErrorsFromSession::class,
             \App\Http\Middleware\VerifyCsrfToken::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
+            \App\Http\Middleware\RedirectBasedOnRole::class, // Add this line
         ],
         'api' => [
             \Illuminate\Routing\Middleware\ThrottleRequests::class.':api',
@@ -42,6 +43,7 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'role' => \App\Http\Middleware\CheckRole::class,
+        'redirect.principal' => \App\Http\Middleware\RedirectPrincipal::class, // Add this line
     ];
 
     protected $middlewarePriority = [
